@@ -5,30 +5,25 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using XRUFX;
 
-
 namespace HVNTPUZZLE_MAC
 {
-    public class spawnPuzzle : MonoBehaviour
+    public class puzzleScript : MonoBehaviour
     {
 
-        PlacementController placementController;
-       
+        spawnPuzzle spawnPuzzle;
+        private Vector3 targetPos = new Vector3(-.65f, 0f, 6f);
+        private Vector3 targetRot = new Vector3(0f, 0f, -180f);
+
         private Vector2 touchPos = default;
-        private AREnvironmentProbePlacementType AREnvironmentProbePlacementType;
-        private List<ARRaycastHit> arRaycastHits = new List<ARRaycastHit>();
-
-        public GameObject puzzleObj;
-
         // Start is called before the first frame update
         void Start()
         {
-          
+        
         }
 
         // Update is called once per frame
         void Update()
         {
-
             int fingerCount = 0;
 
             foreach (Touch touch in Input.touches)
@@ -54,9 +49,9 @@ namespace HVNTPUZZLE_MAC
                 {
                     DebugManager.Instance.AddDebugMessage("Raycast hit success");
                     DebugManager.Instance.AddDebugMessage(raycastHit.ToString());
-                    //Destroy(raycastHit.collider.gameObject);
-                    raycastHit.collider.gameObject.SetActive(false);
-                    Instantiate(puzzleObj, placementController.oldPos, Quaternion.identity);
+                    spawnPuzzle.puzzleObj.transform.position = targetPos;
+                    spawnPuzzle.puzzleObj.transform.position = targetRot;
+
                 }
             }
         }
