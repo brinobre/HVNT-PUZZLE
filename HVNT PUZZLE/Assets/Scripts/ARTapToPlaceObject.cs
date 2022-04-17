@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -14,12 +15,20 @@ namespace HVNTPUZZLE_MAC
         private GameObject spawnedObj;
         private ARRaycastManager aRRaycastManager;
         private Vector2 touchPos;
+        public Button placementBtn;
+        public bool isPlaced = false;
 
         static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
         private void Awake()
         {
             aRRaycastManager = GetComponent<ARRaycastManager>();
+        }
+
+        public void activateBtn()
+        {
+            Destroy(spawnedObj);
+            spawnedObj = null;
         }
 
         bool tryGetTouchPos(out Vector2 touchPos)
@@ -34,8 +43,9 @@ namespace HVNTPUZZLE_MAC
             return false;
         }
 
-        void Update()
+        void placeObject()
         {
+
             if (!tryGetTouchPos(out Vector2 touchPos))
                 return;
 
@@ -47,12 +57,12 @@ namespace HVNTPUZZLE_MAC
                 {
                     spawnedObj = Instantiate(gameObjToInst, hitPose.position, hitPose.rotation);
                 }
-                else
-                {
-                    spawnedObj.transform.position = hitPose.position;
-                }
-
             }
+        }
+
+        void Update()
+        {
+            placeObject();
         }
     }
 }
