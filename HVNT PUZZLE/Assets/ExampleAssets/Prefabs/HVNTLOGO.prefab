@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3682828405819385483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3302851906191539258}
   - {fileID: 3331139780692173494}
@@ -124,8 +124,9 @@ GameObject:
   - component: {fileID: 3331139780692173494}
   - component: {fileID: 4528898210306499614}
   - component: {fileID: 8013046931860075435}
+  - component: {fileID: 1171698038}
   m_Layer: 0
-  m_Name: Text
+  m_Name: V
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,3 +195,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1171698038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7019774159134165144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7687d4a6e169774b951dc24507bf902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 90

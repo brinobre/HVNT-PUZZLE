@@ -33,8 +33,12 @@ public class ARCursor : MonoBehaviour
             {
                 List<ARRaycastHit> hits = new List<ARRaycastHit>();
                 raycastManager.Raycast(Input.GetTouch(0).position, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
+<<<<<<< Updated upstream:HVNT PUZZLE/Assets/ARCursor.cs
                 if(hits.Count > 0)
                 {
+=======
+                if(hits.Count > 0){
+>>>>>>> Stashed changes:HVNT PUZZLE/Assets/Scripts/ARCursor.cs
                     GameObject.Instantiate(objectToPlane, hits[0].pose.position, hits[0].pose.rotation);
                 }
             }
