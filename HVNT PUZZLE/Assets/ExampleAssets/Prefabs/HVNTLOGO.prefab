@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7654077491299881197}
   - component: {fileID: 8768239979908192717}
   - component: {fileID: -6529829541710257342}
+  - component: {fileID: -6980499537219642936}
   m_Layer: 0
   m_Name: HVNTLOGO
-  m_TagString: Untagged
+  m_TagString: HVNT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,6 +74,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4211426, y: 1.7670898, z: 2.577111}
   m_Center: {x: -0.107788086, y: -0.12231445, z: -0.1920892}
+--- !u!114 &-6980499537219642936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3682828405819385483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28397c3d77c264126a2d334ad753c2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4813083432572644247
 GameObject:
   m_ObjectHideFlags: 0

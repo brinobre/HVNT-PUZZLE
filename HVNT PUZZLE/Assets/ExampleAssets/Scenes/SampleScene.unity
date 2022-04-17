@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 22732921}
   m_Layer: 0
   m_Name: AR Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 388525030}
   - component: {fileID: 388525032}
   - component: {fileID: 388525033}
+  - component: {fileID: 388525037}
   - component: {fileID: 388525034}
   - component: {fileID: 388525035}
   - component: {fileID: 388525036}
@@ -495,7 +496,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388525029}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2697e074c94f4b7786c93c0ced39001, type: 3}
   m_Name: 
@@ -504,6 +505,21 @@ MonoBehaviour:
     type: 3}
   placementBtn: {fileID: 1143738724}
   isPlaced: 0
+--- !u!114 &388525037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388525029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648f47bb553104a9891fa1e998f0e149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlaced: 0
+  placedPrefab: {fileID: 3682828405819385483, guid: 1289542a03c6c06448e26d3e7204fcfb,
+    type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +789,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2254496197159706229, guid: 90c64e346f896924584b7fe278bc999d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2254496197820062017, guid: 90c64e346f896924584b7fe278bc999d,
         type: 3}
       propertyPath: m_Pivot.x

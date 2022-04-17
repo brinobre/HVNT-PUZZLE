@@ -8,20 +8,27 @@ using XRUFX;
 
 namespace HVNTPUZZLE_MAC
 {
+    [RequireComponent(typeof(AREnvironmentProbePlacementType))]
     public class spawnPuzzle : MonoBehaviour
     {
         private Vector2 touchPos = default;
+        private AREnvironmentProbePlacementType AREnvironmentProbePlacementType;
+        private List<ARRaycastHit> arRaycastHits = new List<ARRaycastHit>();
+
+        private void Awake()
+        {
+            AREnvironmentProbePlacementType = GetComponent<AREnvironmentProbePlacementType>();
+        }
+
         // Start is called before the first frame update
         void Start()
         {
-        
+
         }
 
         // Update is called once per frame
         void Update()
         {
-            //  if(Input.touchCount > 0)
-            // {
 
             int fingerCount = 0;
 
@@ -38,14 +45,18 @@ namespace HVNTPUZZLE_MAC
                 Touch touch = Input.GetTouch(0);
 
                 touchPos = touch.position;
+                DebugManager.Instance.AddDebugMessage(touchPos.ToString());
 
-                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                    RaycastHit raycastHit;
 
-                    if(Physics.Raycast(ray, out raycastHit))
-                    {
-                        Destroy(raycastHit.collider.gameObject);
-                    }
+                Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                RaycastHit raycastHit;
+
+                if (Physics.Raycast(ray, out raycastHit))
+                {
+                    DebugManager.Instance.AddDebugMessage("Raycast hit success");
+                    DebugManager.Instance.AddDebugMessage(raycastHit.ToString());
+                    Destroy(raycastHit.collider.gameObject);
+                }
             }
         }
     }
