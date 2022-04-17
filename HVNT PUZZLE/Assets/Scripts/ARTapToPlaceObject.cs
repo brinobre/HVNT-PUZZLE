@@ -25,8 +25,9 @@ namespace HVNTPUZZLE_MAC
             aRRaycastManager = GetComponent<ARRaycastManager>();
         }
 
-        public void activateBtn()
+        public void restartBtn()
         {
+            isPlaced = false;
             Destroy(spawnedObj);
             spawnedObj = null;
         }
@@ -49,13 +50,14 @@ namespace HVNTPUZZLE_MAC
             if (!tryGetTouchPos(out Vector2 touchPos))
                 return;
 
-            if (aRRaycastManager.Raycast(touchPos, hits, TrackableType.PlaneWithinPolygon))
+            if (aRRaycastManager.Raycast(touchPos, hits, TrackableType.PlaneWithinPolygon) && !isPlaced)
             {
                 var hitPose = hits[0].pose;
 
                 if (spawnedObj == null)
                 {
                     spawnedObj = Instantiate(gameObjToInst, hitPose.position, hitPose.rotation);
+                    isPlaced = true;
                 }
             }
         }
