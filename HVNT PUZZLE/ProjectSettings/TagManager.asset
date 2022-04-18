@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - HVNT
+  - RowColliders
   layers:
   - Default
   - TransparentFX

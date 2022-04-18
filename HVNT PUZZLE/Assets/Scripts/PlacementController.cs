@@ -136,13 +136,10 @@ namespace HVNTPUZZLE_MAC
             else if (puzzleObjReady && !fingerHasBeenPressed && currentState == GameStates.PICKUP_OBJECT)
             {
                 spawnedObj.transform.position = targetPos;
-                spawnedObj.transform.position = targetRot;
-                DebugManager.Instance.AddDebugMessage(spawnedObj.transform.position.ToString());
-                DebugManager.Instance.AddDebugMessage(spawnedObj.transform.rotation.ToString());
+                spawnedObj.transform.rotation = Quaternion.Euler(targetRot.x, targetRot.y, targetRot.z);
             }
             else
             {
-                
             }
 
             if (currentState == GameStates.REPLACE_OBJECT && touch.phase == TouchPhase.Ended)
@@ -152,6 +149,7 @@ namespace HVNTPUZZLE_MAC
             else if (currentState == GameStates.PICKUP_OBJECT && touch.phase == TouchPhase.Ended)
             {
                 fingerHasBeenPressed = false;
+
             }
         }
 
