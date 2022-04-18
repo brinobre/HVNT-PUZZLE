@@ -14,7 +14,6 @@ namespace HVNTPUZZLE_MAC
         PlacementController placementController;
        
         private Vector2 touchPos = default;
-        private AREnvironmentProbePlacementType AREnvironmentProbePlacementType;
         private List<ARRaycastHit> arRaycastHits = new List<ARRaycastHit>();
 
         public GameObject puzzleObj;
@@ -56,7 +55,7 @@ namespace HVNTPUZZLE_MAC
                     DebugManager.Instance.AddDebugMessage(raycastHit.ToString());
                     //Destroy(raycastHit.collider.gameObject);
                     raycastHit.collider.gameObject.SetActive(false);
-                    Instantiate(puzzleObj, placementController.oldPos, Quaternion.identity);
+                    //Instantiate(puzzleObj, placementController.oldPos, Quaternion.identity);
                 }
             }
         }

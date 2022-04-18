@@ -7,11 +7,21 @@ using XRUFX;
 namespace HVNTPUZZLE_MAC
 {
     [RequireComponent(typeof(ARRaycastManager))]
+    [RequireComponent(typeof(PlacementObject))]
 
     public class PlacementController : MonoBehaviour
     {
 
-        private bool fingerHasBeenReleased = false;
+        public enum GameStates
+        {
+            PLACE_OBJECT,
+            REPLACE_OBJECT,
+            PICKUP_OBJECT
+        }
+
+        private GameStates currentState = GameStates.PLACE_OBJECT;
+
+        private bool fingerHasBeenPressed = false;
 
         public Vector3 oldPos;
 
@@ -19,9 +29,14 @@ namespace HVNTPUZZLE_MAC
 
         private int fingerId = -1;
 
+        private Vector3 targetPos = new Vector3(-0.06f, 0f, 0.6f);
+        private Vector3 targetRot = new Vector3(0f, 0f, 180f);
+
         public bool isPlaced = false;
+        private bool puzzleObjReady = false;
 
         public GameObject puzzleObj;
+        private GameObject spawnedObj;
 
         [SerializeField]
         private GameObject placedPrefab;
@@ -45,6 +60,12 @@ namespace HVNTPUZZLE_MAC
             aRRaycastManager = GetComponent<ARRaycastManager>();
         }
 
+        private void Start()
+        {
+            spawnedObj = Instantiate(puzzleObj, Vector3.zero, Quaternion.identity);
+            spawnedObj.SetActive(false);
+        }
+
         bool TryGetTouchPosition(out Vector2 touchPosition)
         {
             if(Input.touchCount > 0)
@@ -57,26 +78,22 @@ namespace HVNTPUZZLE_MAC
             return false;
         }
 
-        IEnumerator activateBool()
+        private bool canBeActivated = false;
+
+        IEnumerator ActivateTimer()
         {
-            yield return new WaitForSeconds(.5f);
-            isPlaced = true;
+            yield return new WaitForSeconds(1);
+            canBeActivated = true;
 
         }
 
         // Update is called once per frame
         void Update()
         {
-
-
-
             if (!TryGetTouchPosition(out Vector2 touchPosition))
                 return;
 
-
-            if (fingerHasBeenReleased)
-            {
-                DebugManager.Instance.AddDebugMessage("working");
+                DebugManager.Instance.AddDebugMessage("finger Is Pressing");
 
                 Touch touch = Input.GetTouch(0);
 
@@ -85,31 +102,56 @@ namespace HVNTPUZZLE_MAC
                 RaycastHit raycastHit;
 
 
-            if (aRRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && !isPlaced && !fingerHasBeenReleased)
+            if (aRRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && !isPlaced && !fingerHasBeenPressed && currentState == GameStates.PLACE_OBJECT)
             {
                 var hitPose = hits[0].pose;
 
                 oldPos = hitPose.position;
-                Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
-                    isPlaced = true;
 
-            
+                DebugManager.Instance.AddDebugMessage("Object instantiated");
+
+
+                Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
+
+                spawnedObj.transform.position = hitPose.position;
+                spawnedObj.transform.rotation = hitPose.rotation;
+                isPlaced = true;
+
+                StartCoroutine(ActivateTimer());
+                currentState = GameStates.REPLACE_OBJECT;
             }
-                if (Physics.Raycast(ray, out raycastHit) && fingerHasBeenReleased && isPlaced)
+            else if (Physics.Raycast(ray, out raycastHit) && fingerHasBeenPressed && isPlaced && currentState == GameStates.REPLACE_OBJECT)
+            {
+                DebugManager.Instance.AddDebugMessage("Raycast hit success");
+                DebugManager.Instance.AddDebugMessage(raycastHit.ToString());
+
+                if (raycastHit.collider.CompareTag("HVNT") && canBeActivated)
                 {
-                    DebugManager.Instance.AddDebugMessage("Raycast hit success");
-                    DebugManager.Instance.AddDebugMessage(raycastHit.ToString());
-                    Destroy(raycastHit.collider.gameObject);
-                    //raycastHit.collider.gameObject.SetActive(false);
-                    Instantiate(puzzleObj, oldPos, Quaternion.identity);
+                    raycastHit.collider.gameObject.SetActive(false);
+                    spawnedObj.SetActive(true);
+                    puzzleObjReady = true;
+                    currentState = GameStates.PICKUP_OBJECT;
                 }
             }
-
-
-
-            if (Input.touches[fingerId].phase == TouchPhase.Ended)
+            else if (puzzleObjReady && !fingerHasBeenPressed && currentState == GameStates.PICKUP_OBJECT)
             {
-                fingerHasBeenReleased = true;
+                spawnedObj.transform.position = targetPos;
+                spawnedObj.transform.position = targetRot;
+                DebugManager.Instance.AddDebugMessage(spawnedObj.transform.position.ToString());
+                DebugManager.Instance.AddDebugMessage(spawnedObj.transform.rotation.ToString());
+            }
+            else
+            {
+                
+            }
+
+            if (currentState == GameStates.REPLACE_OBJECT && touch.phase == TouchPhase.Ended)
+            {
+                fingerHasBeenPressed = true;
+            }
+            else if (currentState == GameStates.PICKUP_OBJECT && touch.phase == TouchPhase.Ended)
+            {
+                fingerHasBeenPressed = false;
             }
         }
 

@@ -24,7 +24,7 @@ namespace HVNTPUZZLE_MAC
         // Update is called once per frame
         void Update()
         {
-            int fingerCount = 0;
+         /*   int fingerCount = 0;
 
             foreach (Touch touch in Input.touches)
             {
@@ -51,9 +51,9 @@ namespace HVNTPUZZLE_MAC
                     DebugManager.Instance.AddDebugMessage(raycastHit.ToString());
                     spawnPuzzle.puzzleObj.transform.position = targetPos;
                     spawnPuzzle.puzzleObj.transform.position = targetRot;
-
+         
                 }
-            }
+            }*/
         }
     }
 }

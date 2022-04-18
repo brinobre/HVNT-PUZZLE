@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8768239979908192717}
   - component: {fileID: -6529829541710257342}
   - component: {fileID: -6980499537219642936}
+  - component: {fileID: 9159939515555832417}
   m_Layer: 0
   m_Name: HVNTLOGO
   m_TagString: HVNT
@@ -86,6 +87,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28397c3d77c264126a2d334ad753c2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9159939515555832417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3682828405819385483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fbc713d7a984d0b88837443b623f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4813083432572644247
