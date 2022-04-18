@@ -28,7 +28,7 @@ namespace HVNTPUZZLE_MAC
 
         void Update()
         {
-           int fingerCount = 0;
+           /*int fingerCount = 0;
 
             foreach (Touch touch in Input.touches)
             {
@@ -66,6 +66,16 @@ namespace HVNTPUZZLE_MAC
 
                     }
 
+                } 
+            }*/
+
+            if(Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Moved)
+                {
+                    transform.Rotate(0f, touch.deltaPosition.y, 0f);
                 }
             }
         }

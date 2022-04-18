@@ -6,6 +6,10 @@ TagManager:
   tags:
   - HVNT
   - RowColliders
+  - H
+  - V
+  - N
+  - T
   layers:
   - Default
   - TransparentFX
