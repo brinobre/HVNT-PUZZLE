@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HVNT
+  - RowColliders
+  - H
+  - V
+  - N
+  - T
+  - RowCol1
+  - RowCol2
+  - RowCol3
+  - RowCol4
+  - codeInputArea
   layers:
   - Default
   - TransparentFX
