@@ -28,7 +28,7 @@ namespace HVNTPUZZLE_MAC
 
         void Update()
         {
-           /*int fingerCount = 0;
+           int fingerCount = 0;
 
             foreach (Touch touch in Input.touches)
             {
@@ -52,7 +52,7 @@ namespace HVNTPUZZLE_MAC
                 if (Physics.Raycast(ray, out raycastHit))
                 {
                     if (raycastHit.collider.gameObject.CompareTag("RowColliders"))
-                    {
+                    { /*
                         if(firstPos == false)
                         {
                             startPos = raycastHit.point;
@@ -62,21 +62,13 @@ namespace HVNTPUZZLE_MAC
 
                         angle = raycastHit.point.y - startPos.y;
                         rotateCylinder.rotate(angle);
-                        DebugManager.Instance.AddDebugMessage("Angle is" + angle.ToString());
+                        DebugManager.Instance.AddDebugMessage("Angle is" + angle.ToString());*/
 
-                    }
+                        var rotateScript = raycastHit.collider.GetComponent<Rotate>();
+
+                    } 
 
                 } 
-            }*/
-
-            if(Input.touchCount == 1)
-            {
-                Touch touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    transform.Rotate(0f, touch.deltaPosition.y, 0f);
-                }
             }
         }
     }

@@ -10,6 +10,11 @@ TagManager:
   - V
   - N
   - T
+  - RowCol1
+  - RowCol2
+  - RowCol3
+  - RowCol4
+  - codeInputArea
   layers:
   - Default
   - TransparentFX

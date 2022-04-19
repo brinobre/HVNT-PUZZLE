@@ -11,7 +11,6 @@ namespace HVNTPUZZLE_MAC
 
         public void rotate(float angle)
         {
-            cylinder.transform.Rotate(new Vector3(0, 0, 1), angle);
         }
     }
 }

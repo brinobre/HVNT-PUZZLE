@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using XRUFX;
 
@@ -25,7 +26,7 @@ namespace HVNTPUZZLE_MAC
 
         public Vector3 oldPos;
 
-        private Touch pressed;
+        public Text mainText;
 
         private int fingerId = -1;
 
@@ -93,13 +94,13 @@ namespace HVNTPUZZLE_MAC
             if (!TryGetTouchPosition(out Vector2 touchPosition))
                 return;
 
-                DebugManager.Instance.AddDebugMessage("finger Is Pressing");
+            DebugManager.Instance.AddDebugMessage("finger Is Pressing");
 
-                Touch touch = Input.GetTouch(0);
+            Touch touch = Input.GetTouch(0);
 
 
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                RaycastHit raycastHit;
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            RaycastHit raycastHit;
 
 
             if (aRRaycastManager.Raycast(touchPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon) && !isPlaced && !fingerHasBeenPressed && currentState == GameStates.PLACE_OBJECT)
@@ -112,6 +113,7 @@ namespace HVNTPUZZLE_MAC
 
 
                 Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
+                mainText.text = "Klicka på loggan för att låsa upp pusslet!";
 
                 spawnedObj.transform.position = hitPose.position;
                 spawnedObj.transform.rotation = hitPose.rotation;
@@ -129,14 +131,18 @@ namespace HVNTPUZZLE_MAC
                 {
                     raycastHit.collider.gameObject.SetActive(false);
                     spawnedObj.SetActive(true);
+                    mainText.text = "Klicka på pusslet att plocka upp det";
                     puzzleObjReady = true;
                     currentState = GameStates.PICKUP_OBJECT;
                 }
+
+
             }
             else if (puzzleObjReady && !fingerHasBeenPressed && currentState == GameStates.PICKUP_OBJECT)
             {
                 spawnedObj.transform.position = targetPos;
                 spawnedObj.transform.rotation = Quaternion.Euler(targetRot.x, targetRot.y, targetRot.z);
+                mainText.text = "Dra pusslet för att lösa det!";
             }
             else
             {
@@ -151,8 +157,8 @@ namespace HVNTPUZZLE_MAC
                 fingerHasBeenPressed = false;
 
             }
+  
         }
-
         static List<ARRaycastHit> hits = new List<ARRaycastHit>();
     }
 }
