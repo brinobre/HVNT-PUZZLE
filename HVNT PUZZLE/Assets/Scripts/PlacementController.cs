@@ -17,7 +17,8 @@ namespace HVNTPUZZLE_MAC
         {
             PLACE_OBJECT,
             REPLACE_OBJECT,
-            PICKUP_OBJECT
+            PICKUP_OBJECT,
+            PICKEDUP_OBJECT
         }
 
         private GameStates currentState = GameStates.PLACE_OBJECT;
@@ -30,8 +31,8 @@ namespace HVNTPUZZLE_MAC
 
         private int fingerId = -1;
 
-        private Vector3 targetPos = new Vector3(-0.06f, 0f, 0.6f);
-        private Vector3 targetRot = new Vector3(0f, 0f, 180f);
+        private Vector3 targetPos = new Vector3(0.06f, 0f, 0.6f);
+        private Vector3 targetRot = new Vector3(0f, 90f, -90f);
 
         public bool isPlaced = false;
         private bool puzzleObjReady = false;
@@ -143,6 +144,7 @@ namespace HVNTPUZZLE_MAC
                 spawnedObj.transform.position = targetPos;
                 spawnedObj.transform.rotation = Quaternion.Euler(targetRot.x, targetRot.y, targetRot.z);
                 mainText.text = "Dra pusslet för att lösa det!";
+                currentState = GameStates.PICKEDUP_OBJECT;
             }
             else
             {
